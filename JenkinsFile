@@ -3,7 +3,7 @@ pipeline {
       
      tools {
         // Specify the name of the tool configured in Global Tool Configuration
-        python 'Python'
+        python 'Python3'
        }
 
     stages {
