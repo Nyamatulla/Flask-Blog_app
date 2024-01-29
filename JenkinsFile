@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     // Define the SonarScanner tool
-                    def scannerHome = tool 'SonarScanner'
+                    def scannerHome = tool 'sonar-scanner'
 
                     // Configure SonarQube environment
                     withSonarQubeEnv('Your_SonarQube_Environment_Name') {
