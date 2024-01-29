@@ -1,0 +1,15 @@
+<!-- app/templates/layout.html -->
+<!doctype html>
+<html>
+<head>
+    <title>{% block title %}AWS Blog{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{{ url_for('index') }}">AWS Blog</a></h1>
+    </header>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
