@@ -1,31 +1,30 @@
 pipeline {
-     agent any
-      
-     tools {
-        // Specify the name of the tool configured in Global Tool Configuration
-        python 'Python3'
-       }
+    agent any
+
+    environment {
+        // Define an environment variable for the Python executable path
+        PYTHON_HOME = tool 'Python3'
+        PATH = "$PYTHON_HOME;$PATH"
+    }
 
     stages {
-        stage('code checkout ') {
+        stage('code checkout') {
             steps {
                 git changelog: false, poll: false, url: 'https://github.com/Nyamatulla/Flask-Blog_app.git'
             }
         }
-    
-    
+
         stage('Install dependencies') {
             steps {
                 bat 'python -m pip install -r requirements.txt'
             }
         }
-    
+
         stage('Run Tests') {
             steps {
                 // Assuming you have a testing command, adjust as needed
                 bat 'python -m unittest discover tests'
             }
         }
-    }    
-
+    }
 }
