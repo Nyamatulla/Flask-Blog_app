@@ -7,27 +7,13 @@ pipeline {
                 git changelog: false, poll: false, url: 'https://github.com/Nyamatulla/Flask-Blog_app.git'
             }
         }
-
-        stage('Install dependencies') {
-            steps {
-                script {
-                    // Use 'choco' without the 'bat' command
-                    sh 'choco install python --version=3.12.0 -y'
-                    
-                    // Add Python to PATH
-                    bat 'set PATH=%PYTHON_HOME%;%PATH%'
-                    
-                    // Install dependencies using pip
-                    bat 'python -m pip install -r requirements.txt'
+        stage('SonarQube Analysis') {
+         def scannerHome = tool 'SonarScanner';
+          withSonarQubeEnv() {
+              bat "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
-            }
-        }
+          }
 
-        stage('Run Tests') {
-            steps {
-                // Assuming you have a testing command, adjust as needed
-                bat 'python -m unittest discover tests'
-            }
-        }
+        
     }
-}
