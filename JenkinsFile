@@ -7,13 +7,20 @@ pipeline {
                 git changelog: false, poll: false, url: 'https://github.com/Nyamatulla/Flask-Blog_app.git'
             }
         }
+
         stage('SonarQube Analysis') {
-         def scannerHome = tool 'SonarScanner';
-          withSonarQubeEnv() {
-              bat "${scannerHome}/bin/sonar-scanner"
+            steps {
+                script {
+                    // Define the SonarScanner tool
+                    def scannerHome = tool 'SonarScanner'
+
+                    // Configure SonarQube environment
+                    withSonarQubeEnv('Your_SonarQube_Environment_Name') {
+                        // Run SonarScanner
+                        bat "${scannerHome}/bin/sonar-scanner"
                     }
                 }
-          }
-
-        
+            }
+        }
     }
+}
