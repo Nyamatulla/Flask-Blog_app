@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        // Define an environment variable for the Python executable path
-        PYTHON_HOME = tool 'Python3'
-        PATH = "$PYTHON_HOME;$PATH"
-    }
-
     stages {
         stage('code checkout') {
             steps {
