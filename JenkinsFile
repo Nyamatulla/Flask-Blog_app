@@ -15,7 +15,7 @@ pipeline {
                     def scannerHome = tool 'sonar-scanner'
 
                     // Configure SonarQube environment
-                    withSonarQubeEnv('Your_SonarQube_Environment_Name') {
+                    withSonarQubeEnv('sonar') {
                         // Run SonarScanner
                         bat "${scannerHome}/bin/sonar-scanner"
                     }
