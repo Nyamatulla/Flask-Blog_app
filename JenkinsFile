@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        PATH = "C:\\Users\\Nyamatulla\\AppData\\Local\\Programs\\Python\\Python312\\Scripts;${env.PATH}"
+    }
 
     stages {
         stage('code checkout') {
@@ -23,13 +26,13 @@ pipeline {
             }
         } */
 
-        stage('Setup') {
+      /*  stage('Setup') {
             steps {
                 bat 'choco install python --ignore-checksums'
                 bat 'refreshenv'
                 bat 'python -m pip install --upgrade pip'
             }   
-        }
+        } */
 
         stage('Install dependencies') {
             steps {
