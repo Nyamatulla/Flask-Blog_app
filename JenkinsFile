@@ -22,6 +22,14 @@ pipeline {
                 }
             }
         }
+        stage('Setup') {
+            steps {
+                bat 'choco install python'
+                bat 'refreshenv'
+                bat 'python -m pip install --upgrade pip'
+            }   
+        }
+
         stage('Install dependencies') {
             steps {
                 bat 'pip install requirements.txt'
