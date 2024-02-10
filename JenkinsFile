@@ -22,5 +22,10 @@ pipeline {
                 }
             }
         }
+        stage('Install dependencies') {
+            steps {
+                bat 'pip install requirements.txt'
+            }
+        }
     }
 }
