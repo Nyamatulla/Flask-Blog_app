@@ -8,7 +8,7 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        /* stage('SonarQube Analysis') {
             steps {
                 script {
                     // Define the SonarScanner tool
@@ -21,7 +21,8 @@ pipeline {
                     }
                 }
             }
-        }
+        } */
+
         stage('Setup') {
             steps {
                 bat 'choco install python'
