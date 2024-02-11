@@ -41,6 +41,7 @@ pipeline {
         }
         stage('Static Application Security Testing (SAST)') {
              steps {
+                echo 'performing SAST'
                 bat 'pip install bandit'
                 bat 'bandit -r E://app'
             }
