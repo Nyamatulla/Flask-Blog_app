@@ -4,7 +4,7 @@ pipeline {
         PATH = "C:\\Users\\Nyamatulla\\AppData\\Local\\Programs\\Python\\Python312\\Scripts;${env.PATH}"
         DOCKER_IMAGE = "nyamatulla/flask-blog-app:${BUILD_NUMBER}" 
         REGISTRY_CREDENTIALS = credentials('dockerHub')
-        ZAP_PATH = "C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap.bat"
+        ZAP_PATH = "\"C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap.bat\""
     }
 
     stages {
