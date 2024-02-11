@@ -39,5 +39,12 @@ pipeline {
                 bat 'pip install -r requirements.txt'
             }
         }
+        stage('Static Application Security Testing (SAST)') {
+             steps {
+                bat 'pip install bandit'
+                bat 'bandit -r E://app'
+            }
+        }
+
     }
 }
