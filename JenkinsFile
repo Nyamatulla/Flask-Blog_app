@@ -79,6 +79,8 @@ pipeline {
             steps {
                script {
             // Start ZAP
+                  echo "ZAP_PATH: ${ZAP_PATH}"
+
                   bat "${ZAP_PATH} -daemon -config api.disablekey=true"
 
             // Wait for ZAP to start
