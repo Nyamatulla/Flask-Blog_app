@@ -46,6 +46,13 @@ pipeline {
                 bat 'bandit -r app'
             }
         }
+        stage('Dependency Scanning') {
+             steps {
+                bat 'pip install safety'
+                bat 'safety check'
+            }
+        }
+
 
     }
 }
