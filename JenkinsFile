@@ -68,8 +68,8 @@ pipeline {
         }                     
         stage('Docker run') {
             steps {
-                bat ' docker stop -f flask-blog1 '
-                bat ' docker rm -f flask-blog1 '
+                bat ' docker stop flask-blog1 '
+                bat ' docker rm  flask-blog1 '
                 bat " docker run -d -p 5000:5000 --name flask-blog1 ${DOCKER_IMAGE} "
                 sleep 50
             }
