@@ -66,7 +66,16 @@ pipeline {
                   } */
                }       
             }  
-        }                     
+        } 
+        stage('Vulnerability Scanning') {
+            steps {
+               script {
+
+                // Run Trivy scan on the Docker image
+                  bat "trivy --severity HIGH,CRITICAL --exit-code 1 ${DOCKER_IMAGE}"
+               }
+            }
+        }
         stage('Docker run') {
             steps {
                 bat " docker run -d -p 5000:5000 --name ${DOCKER_CONT} ${DOCKER_IMAGE} "
