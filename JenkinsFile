@@ -61,7 +61,7 @@ pipeline {
         } 
         stage('Update Deployment File') {
             environment {
-                GIT_REPO_NAME = "CI-CD_ultimate_project"
+                GIT_REPO_NAME = "Flask-Blog_app"
                 GIT_USER_NAME = "Nyamatulla"
             }
             steps {
