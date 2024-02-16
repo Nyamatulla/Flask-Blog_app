@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE = "nyamatulla/flask-blog-app:${BUILD_NUMBER}"
         DOCKER_CONT = "flask-blog${BUILD_NUMBER}"
         REGISTRY_CREDENTIALS = credentials('dockerHub')
-        ZAP_PATH = "\"C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap.bat\""
+        
     }
 
     stages {
@@ -28,14 +28,6 @@ pipeline {
                     }
                 }
             }
-        } */
-
-      /*  stage('Setup') {
-            steps {
-                bat 'choco install python --ignore-checksums'
-                bat 'refreshenv'
-                bat 'python -m pip install --upgrade pip'
-            }   
         } */
 
         stage('Install dependencies') {
@@ -67,21 +59,25 @@ pipeline {
                }       
             }  
         } 
-        stage('Vulnerability Scanning') {
-            steps {
-               script {
-
-                // Run Trivy scan on the Docker image
-                  bat "trivy --severity HIGH,CRITICAL --exit-code 1 ${DOCKER_IMAGE}"
-               }
+        stage('Update Deployment File') {
+        environment {
+            GIT_REPO_NAME = "CI-CD_ultimate_project"
+            GIT_USER_NAME = "Nyamatulla"
+        }
+        steps {
+            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                bat '''
+                    git config user.email "nyamatathani02@gmail.com"
+                    git config user.name "Nyamatulla"
+                    BUILD_NUMBER=${BUILD_NUMBER}
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" k3s-manifest/deployment.yml
+                    git add k3s-manifest/deployment.yml
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                '''
             }
         }
-        stage('Docker run') {
-            steps {
-                bat " docker run -d -p 5000:5000 --name ${DOCKER_CONT} ${DOCKER_IMAGE} "
-                sleep 30
-            }
-        }
+    }
         
     
     }
